@@ -270,7 +270,9 @@ M.MoveCursor = function(forward, visual)
 
   local ok, result = pcall(
     function()
+      vim.cmd.normal('m`')
       vim.fn.cursor(jumpToLine, 1)
+      vim.cmd.normal('m`')
     end
   )
 
