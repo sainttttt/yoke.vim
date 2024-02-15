@@ -19,7 +19,7 @@ M.setup = function(args)
   M.config = vim.tbl_deep_extend("force", M.config, args or {})
 end
 
--- function _G.dump(o)
+-- function dump(o)
 --    if type(o) == 'table' then
 --       local s = '{ '
 --       for k,v in pairs(o) do
@@ -165,7 +165,6 @@ local function ParLine(forward, matchFunc, searchFunc, type)
 
     -- print('curline: ' .. curLine .. "type: " .. type)
     local prevNextLine = GetPrevNextLine(forward, curLine)
-    -- print(dump(prevNextLine))
     local prevLineNum = prevNextLine[1][2]
     local nextLineNum = prevNextLine[2][2]
 
@@ -211,13 +210,12 @@ function Set (list)
   return set
 end
 
-Filetypes = Set{'nim', 'swift', 'c', 'cpp'}
+Filetypes = Set{'nim', 'lua', 'swift', 'c', 'cpp', 'python'}
 
 M.MoveCursor = function(forward, visual)
 
   local prevPos=vim.fn.getcurpos()
   local nextPar = ParLine(forward, IsLineEmpty, SearchBlankLines, "b")
-
 
   -- print('nextpar: ' .. nextPar)
 
@@ -276,7 +274,7 @@ M.MoveCursor = function(forward, visual)
     end
   )
 
-  if not ok then
+  if not ok and jumpToLine then
     print("error in jump: " .. jumpToLine)
   end
   -- vim.fn.cursor(jumpToLine, 1)
