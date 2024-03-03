@@ -268,9 +268,9 @@ M.MoveCursor = function(forward, visual)
 
   local ok, result = pcall(
     function()
-      vim.cmd.normal('m`')
+      vim.cmd('mark `')
       vim.fn.cursor(jumpToLine, 1)
-      vim.cmd.normal('m`')
+      vim.cmd('mark `')
     end
   )
 
