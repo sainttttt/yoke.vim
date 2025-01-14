@@ -228,7 +228,7 @@ M.MoveCursor = function(forward, visual)
       SearchSyntaxTokenLine,
       "a")
   end
- 
+
   -- print('nextSyn' .. nextSyn)
 
   if true then end
@@ -236,7 +236,7 @@ M.MoveCursor = function(forward, visual)
 
   -- echo "nextPar: ". nextPar
   -- echo "nextSyn: ". nextSyn
- 
+
 
   local jumpToLine = nextPar
   if forward ~= 'b' then
@@ -266,11 +266,15 @@ M.MoveCursor = function(forward, visual)
     end
   end
 
+  -- the mark stuff is there to append to the jump list
+  -- so that ctrl+p and ctrl+o get affected by it.
+  -- currently removing it because I'm not sure that I
+  -- actually want that functionality
   local ok, result = pcall(
     function()
-      vim.cmd('mark `')
+      -- vim.cmd('mark `')
       vim.fn.cursor(jumpToLine, 1)
-      vim.cmd('mark `')
+      -- vim.cmd('mark `')
     end
   )
 
